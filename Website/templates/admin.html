@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}admin{% endblock %}
+{% block pagename %}<h1>Admin Dashboard</h1>
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+
+    {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.price }}</td>
+            <td><button type="button" class="btn btn-danger" onClick="deletePro({{product.id}})" >Delete</button></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

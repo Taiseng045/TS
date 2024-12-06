@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}admin{% endblock %}
+{% block pagename %}<h1>Purchase History</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in history %}
+        <tr>
+            <td>{{ record.product_name }}</td>
+            <td>{{ record.quantity }}</td>
+            <td>{{ record.total_price }}</td>
+            <td>{{ record.status }}</td>
+            <td>{{ record.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

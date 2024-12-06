@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Your Cart </h2>
+    {% if cart_items %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            <img src="{{ url_for('static', filename=item.Product.image_url.lstrip('static/').replace('\\', '/')) }}" 
+                                 alt="{{ item.Product.name }}" 
+                                 style="width: 100px; height: 100px; object-fit: cover;">
+                            <p>{{ item.Product.name }}</p>
+                        </td>
+                        <td>${{ item.Product.price }}</td>
+
+                        <td>
+                            <form action="{{ url_for('views.update_cart', product_id=item.Product.id) }}" method="POST">
+                                <input type="number" name="quantity" value="{{ item.Cart.quantity }}" min="1" class="form-control" style="width: 80px; display: inline;">
+                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            </form>
+                        </td>
+                        <td>${{ item.Cart.quantity * item.Product.price }}</td>
+                        <td>
+                            <form action="{{ url_for('views.remove_from_cart', product_id=item.Product.id) }}" method="POST">
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Total: ${{ total_price }}</h3>
+
+        <div class="mt-4">
+            <!-- {{ url_for('views.checkout') }} -->
+            <form action="{{ url_for('views.checkout') }} " method="POST">
+                <button type="submit" class="btn btn-success">Proceed to Checkout</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Your cart is empty!</p>
+    {% endif %}
+</div>
+{% endblock %}

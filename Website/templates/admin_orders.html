@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}admin{% endblock %}
+{% block pagename %}<h1>ALL orders</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.fname }} {{ order.user.lname }}</td>
+            <td>{{ order.product_name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                <form class="row g-3" action="{{ url_for('views.update_order', order_id=order.id) }}" method="POST">
+                    <div class="col-6"><select class="form-control " name="status">
+                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="In Progress" {% if order.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                        <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                        <option value="Complete" {% if order.status == 'Complete' %}selected{% endif %}>Complete</option>
+                        <option value="Canceled" {% if order.status == 'Canceled' %}selected{% endif %}>Canceled</option>
+                    </select></div>
+                    <div class="col-6"><button class="btn btn-primary" type="submit">Update</button></div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

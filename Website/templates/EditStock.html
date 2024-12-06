@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="p-3 w-50 align-center border rounded">
+    <form class="row g-3" method="POST" enctype="multipart/form-data">
+        <div class="col-12">
+            <h1>Login</h1>
+        </div>
+        <div class="col-12">
+            <label for="pname" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="pname" name="pname" placeholder="Product Name"
+                aria-describedby="emailHelp">
+        </div>
+        <div class="col-12">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+        </div>
+        <div class="col-12">
+            <label for="stock" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="stock" name="stock" placeholder="Amount">
+        </div>
+        <div class="col-12">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image" placeholder="Image">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block content %} 
+<div>
+    <div class="row" >
+        {% for product in products %}
+        <div class="col-6">
+                <div class="card align mt-5" style="width:35rem;height:45rem ">
+                    <div  style="position: relative;
+                    height: 90%;
+                    overflow: hidden;">
+                     <img class="w-100" src="{{ url_for('static', filename=product.image_url.lstrip('static/').replace('\\', '/')) }} ">
+                     
+                    </div>
+                    <div class="card-body p-4">
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <h5 class="card-text">Price: {{ product.price }}</h5>
+                        <form action="{{ url_for('views.add_to_cart', product_id=product.id) }}" method="POST">
+                            <button type="submit" class="btn btn-light cart-btn w-100">Add to cart</button>
+                        </form>
+                        
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
